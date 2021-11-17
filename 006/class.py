@@ -1,10 +1,6 @@
-﻿class Point:
-    def move(self):
-        print("move")
-    def draw(self):
-        print("draw")
+﻿class Person:
+    def __init__(self, name):
+        self.name = name
+    def talk(self):
+        print("talk")
 
-
-point1  = Point()
-
-point1.draw()
