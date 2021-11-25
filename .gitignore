@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # config files
-.yml
+auth_config.yml
