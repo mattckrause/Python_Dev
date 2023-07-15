@@ -20,11 +20,11 @@ def check_guess(user_guess):
 		if user_guess in current_game_word:
 			update_correct(user_guess)
 			check_game_status()
-			advance_round()
+			print_game_status()
 		else:
 			update_incorrect(user_guess)
 			check_game_status()
-			advance_round()
+			print_game_status()
 
 def check_game_status():
 	global game_status
@@ -37,15 +37,29 @@ def check_game_status():
 		advance_round()
 		return game_status
 
+def print_game_status():
+	global correct_guess
+	global incorrect_guess
+	global word_length
+	print("The word is: " + correct_guess[word_length -1:])
+	print("Your incorrect guesses so far: " + incorrect_guess)
+
 def update_correct(letter):
 	global correct_guess
-	correct_guess += letter
-	print("Correct, the word so far: "+ correct_guess)
+	#build a string in the correct order of the correct_guess
+	for i in range(word_length):
+		if current_game_word[i] == letter:
+			correct_guess += letter
+		elif current_game_word[i] in correct_guess:
+			correct_guess += current_game_word[i]
+		else:
+			correct_guess += "_"
+	#print("Correct, the word so far: "+ correct_guess)
 
 def update_incorrect(letter):
 	global incorrect_guess
 	incorrect_guess += letter + " "
-	print("Wrong, your incorrect guesses so far: "+ incorrect_guess)
+	#print("Wrong, your incorrect guesses so far: "+ incorrect_guess)
 
 def advance_round():
 	global attempts
