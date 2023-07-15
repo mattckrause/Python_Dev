@@ -19,10 +19,23 @@ def check_guess(user_guess):
 	else:
 		if user_guess in current_game_word:
 			update_correct(user_guess)
+			check_game_status()
 			advance_round()
 		else:
 			update_incorrect(user_guess)
+			check_game_status()
 			advance_round()
+
+def check_game_status():
+	global game_status
+	if attempts == 11:
+		game_status = "lost"
+		print("You lost, the word was " + current_game_word)
+		return game_status
+	else:
+		game_status = "in progress"
+		advance_round()
+		return game_status
 
 def update_correct(letter):
 	global correct_guess
@@ -45,7 +58,7 @@ print("The word is "+ str(word_length) + " letters long")
 print("You have 10 attempts to guess the word")
 print("the word is " + current_game_word)
 
-while attempts < 11 and game_status != "won":
+while game_status != "won" and game_status != "lost":
 	user_guess = input("Guess a letter: ").lower()
 	if user_guess is None:
 	#if len(user_guess) > 1 or user_guess is None:
