@@ -25,25 +25,38 @@ def check_guess(user_guess):
 			update_incorrect(user_guess)
 			check_game_status()
 			print_game_status()
+			advance_round()
 
 def check_game_status():
 	global game_status
-	if attempts == 11:
+	build_word(guess_dictionary)
+	if attempts == 10:
 		game_status = "lost"
-		print("You lost, the word was " + current_game_word)
+		
+		return game_status
+	elif correct_guess == current_game_word:
+		game_status = "won"
+		
 		return game_status
 	else:
 		game_status = "in progress"
-		advance_round()
+		# advance_round()
 		return game_status
 
 def print_game_status():
 	global correct_guess
 	global incorrect_guess
 	global word_length
-	build_word(guess_dictionary)
-	print(correct_guess)
-	print("Your incorrect guesses so far: " + incorrect_guess)
+	if game_status == "won":
+		print("\n\n***Congratulations, You won!! the word was " + current_game_word)
+		return
+	elif game_status == "lost":
+		print("\n:(\nYou lost, the word was " + current_game_word)
+		return
+	else:
+		print("\nYour correct guesses so far: " + correct_guess)
+		print("\nYour incorrect guesses so far: " + incorrect_guess)
+		return
 
 def build_word(var):
 	global correct_guess
@@ -58,7 +71,6 @@ def build_dictionary():
 
 def update_correct(letter):
 	global correct_guess
-	#build a string in the correct order of the correct_guess
 	for i, ltr in enumerate(current_game_word):
 		if ltr == user_guess:
 			guess_dictionary.update({i:ltr})
@@ -66,23 +78,21 @@ def update_correct(letter):
 def update_incorrect(letter):
 	global incorrect_guess
 	incorrect_guess += letter + " "
-	#print("Wrong, your incorrect guesses so far: "+ incorrect_guess)
 
 def advance_round():
 	global attempts
 	attempts += 1
-	print("You have " + str(11-attempts) + " attempts left")
+	print("\nYou have " + str(11-attempts) + " attempts left\n")
 
 #main
-print("Welcome to Hangman!")
-print("The word is "+ str(word_length) + " letters long")
-print("You have 10 attempts to guess the word")
-print("the word is " + current_game_word) #for testing purposes
+print("Welcome to Hangman!\n\n")
+print("The word is "+ str(word_length) + " letters long\n")
+print("You have 10 attempts to guess the word\nGood Luck!\n\n")
 build_dictionary()
 
 while game_status != "won" and game_status != "lost":
 	user_guess = input("Guess a letter: ").lower()
 	if user_guess is None:
-		print("Please enter only one letter")
+		print("\nPlease enter only one letter\n")
 	else:
 		check_guess(user_guess)
