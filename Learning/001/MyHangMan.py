@@ -18,10 +18,12 @@ def check_guess(user_guess):
 		print("You already guessed that letter try again")
 	else:
 		if user_guess in current_game_word:
+			print("Correct, guess again:\n")
 			update_correct(user_guess)
 			check_game_status()
 			print_game_status()
 		else:
+			print("Wrong, try again:\n")
 			update_incorrect(user_guess)
 			check_game_status()
 			print_game_status()
@@ -54,8 +56,9 @@ def print_game_status():
 		print("\n:(\nYou lost, the word was " + current_game_word)
 		return
 	else:
-		print("\nYour correct guesses so far: " + correct_guess)
-		print("\nYour incorrect guesses so far: " + incorrect_guess)
+		print("Game Status:\n")
+		print("Your correct guesses so far: " + correct_guess)
+		print("Your incorrect guesses so far: " + incorrect_guess)
 		return
 
 def build_word(var):
