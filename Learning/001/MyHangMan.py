@@ -4,6 +4,7 @@ import random
 
 #declare variables
 word_dictionary = {1:"Cat", 2:"Dog", 3:"Bird", 4:"Fish", 5:"Lizard"}
+guess_dictionary = {}
 current_game_word = word_dictionary[random.randint(1,5)].lower()
 word_length = len(current_game_word)
 correct_guess = ""
@@ -41,20 +42,23 @@ def print_game_status():
 	global correct_guess
 	global incorrect_guess
 	global word_length
-	print("The word is: " + correct_guess[word_length -1:])
+	build_word(guess_dictionary)
+	print(correct_guess)
 	print("Your incorrect guesses so far: " + incorrect_guess)
+
+def build_word(var):
+    global correct_guess
+    for i in var:
+        correct_guess += var[i]
 
 def update_correct(letter):
 	global correct_guess
 	#build a string in the correct order of the correct_guess
-	for i in range(word_length):
-		if current_game_word[i] == letter:
-			correct_guess += letter
-		elif current_game_word[i] in correct_guess:
-			correct_guess += current_game_word[i]
+	for i, ltr in enumerate(current_game_word):
+		if ltr == user_guess:
+			guess_dictionary.update({i:ltr})
 		else:
-			correct_guess += "_"
-	#print("Correct, the word so far: "+ correct_guess)
+			guess_dictionary.update({i:"_"})
 
 def update_incorrect(letter):
 	global incorrect_guess
