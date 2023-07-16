@@ -11,7 +11,6 @@ correct_guess = ""
 incorrect_guess = ""
 attempts = 1
 game_status = "in progress"
-user_guess = " "
 
 #functions
 def check_guess(user_guess):
@@ -47,9 +46,15 @@ def print_game_status():
 	print("Your incorrect guesses so far: " + incorrect_guess)
 
 def build_word(var):
-    global correct_guess
-    for i in var:
-        correct_guess += var[i]
+	global correct_guess
+	correct_guess = ""
+	for i in var:
+		correct_guess += var[i]
+
+def build_dictionary():
+	global guess_dictionary
+	for i in range(0,word_length):
+		guess_dictionary.update({i:"_"})
 
 def update_correct(letter):
 	global correct_guess
@@ -57,8 +62,6 @@ def update_correct(letter):
 	for i, ltr in enumerate(current_game_word):
 		if ltr == user_guess:
 			guess_dictionary.update({i:ltr})
-		else:
-			guess_dictionary.update({i:"_"})
 
 def update_incorrect(letter):
 	global incorrect_guess
@@ -74,12 +77,12 @@ def advance_round():
 print("Welcome to Hangman!")
 print("The word is "+ str(word_length) + " letters long")
 print("You have 10 attempts to guess the word")
-print("the word is " + current_game_word)
+print("the word is " + current_game_word) #for testing purposes
+build_dictionary()
 
 while game_status != "won" and game_status != "lost":
 	user_guess = input("Guess a letter: ").lower()
 	if user_guess is None:
-	#if len(user_guess) > 1 or user_guess is None:
 		print("Please enter only one letter")
 	else:
 		check_guess(user_guess)
