@@ -3,27 +3,35 @@
 import random
 
 #declare variables
-word_dictionary = {1:"Cat", 2:"Dog", 3:"Bird", 4:"Fish", 5:"Lizard"}
+word_dictionary = {1:"Cat", 2:"Dog", 3:"Bird", 4:"Fish", 5:"Lizard", 6:"Girraffe", 7:"Elephant", 8:"Monkey", 9:"Tiger", 10:"Lion"}
 guess_dictionary = {}
-current_game_word = word_dictionary[random.randint(1,5)].lower()
+current_game_word = word_dictionary[random.randint(1,10)].lower()
 word_length = len(current_game_word)
 correct_guess = ""
 incorrect_guess = ""
+incorrect_guess_count = 10
 attempts = 1
 game_status = "in progress"
 
 #functions
 def check_guess(user_guess):
+	global correct_guess
 	if user_guess in correct_guess or user_guess in incorrect_guess:
 		print("You already guessed that letter try again")
+	elif user_guess == "":
+		print("\nPlease enter only one letter\n")
+	elif user_guess.isalpha() == False:
+		print("\nPlease enter only letters\n")
+	elif len(user_guess) > 1:
+		print("\nPlease enter only one letter\n")
 	else:
 		if user_guess in current_game_word:
-			print("Correct, guess again:\n")
+			print("Correct, guess again:\n") #move this so it doesn't prompt on game winning guess
 			update_correct(user_guess)
 			check_game_status()
 			print_game_status()
 		else:
-			print("Wrong, try again:\n")
+			print("Wrong, try again:\n") #move this so it doesn't promt on a game losing guess
 			update_incorrect(user_guess)
 			check_game_status()
 			print_game_status()
@@ -32,17 +40,17 @@ def check_guess(user_guess):
 def check_game_status():
 	global game_status
 	build_word(guess_dictionary)
-	if attempts == 10:
+	if attempts == incorrect_guess_count:
 		game_status = "lost"
-		
 		return game_status
 	elif correct_guess == current_game_word:
 		game_status = "won"
-		
 		return game_status
+	#elif correct_guess != current_game_word:
+	#	game_status = "lost"
+	#	return game_status
 	else:
 		game_status = "in progress"
-		# advance_round()
 		return game_status
 
 def print_game_status():
@@ -50,7 +58,8 @@ def print_game_status():
 	global incorrect_guess
 	global word_length
 	if game_status == "won":
-		print("\n\n***Congratulations, You won!! the word was " + current_game_word)
+		print(correct_guess)
+		print("\n\n***Congratulations, You won!!")
 		return
 	elif game_status == "lost":
 		print("\n:(\nYou lost, the word was " + current_game_word)
@@ -85,7 +94,11 @@ def update_incorrect(letter):
 def advance_round():
 	global attempts
 	attempts += 1
-	print("\nYou have " + str(11-attempts) + " attempts left\n")
+	user_guess = ""
+	if attempts >= 1:
+		print("\nYou have " + str(11-attempts) + " attempts left\n")
+	else:
+		return
 
 #main
 print("Welcome to Hangman!\n\n")
@@ -95,7 +108,4 @@ build_dictionary()
 
 while game_status != "won" and game_status != "lost":
 	user_guess = input("Guess a letter: ").lower()
-	if user_guess is None:
-		print("\nPlease enter only one letter\n")
-	else:
-		check_guess(user_guess)
+	check_guess(user_guess)
