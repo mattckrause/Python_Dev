@@ -1,15 +1,9 @@
-﻿from tkinter import *
+﻿check = True
 
-root = Tk()
-
-root.title("Testing")
-root.geometry("400x400")
-
-def myClick():
-    myLabel = Label(root, text="Look! I clicked a Button!")
-    myLabel.pack()
-
-myButton = Button(root, text="Click Me!", command=myClick, fg="black")
-myButton.pack()
-
-root.mainloop()
+try:
+    if check is True:
+        print("Check is true")
+    else:
+        print("Check is false")
+except:
+    print("Error")
