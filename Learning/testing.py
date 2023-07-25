@@ -1,9 +1,13 @@
-﻿check = True
+﻿import tkinter as tk
 
-try:
-    if check is True:
-        print("Check is true")
-    else:
-        print("Check is false")
-except:
-    print("Error")
+window = tk.Tk()
+window.title("Hangman")
+window.geometry("500x500")
+
+greeting = tk.Label(text="Welcome to Hangman!")
+greeting.pack()
+
+guess = tk.Entry()
+guess.pack()
+
+window.mainloop()
