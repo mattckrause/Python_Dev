@@ -102,11 +102,12 @@ def advance_round():
 		return
 
 #main
-print("Welcome to Hangman!\n\n")
-print("The word is "+ str(word_length) + " letters long\n")
-print("You have 10 attempts to guess the word\nGood Luck!\n\n")
-build_dictionary()
+if __name__ == "__main__":
+	print("Welcome to Hangman!\n\n")
+	print("The word is "+ str(word_length) + " letters long\n")
+	print("You have 10 attempts to guess the word\nGood Luck!\n\n")
+	build_dictionary()
 
-while game_status != "won" and game_status != "lost":
-	user_guess = input("Guess a letter: ").lower()
-	check_guess(user_guess)
+	while game_status != "won" and game_status != "lost":
+		user_guess = input("Guess a letter: ").lower()
+		check_guess(user_guess)
