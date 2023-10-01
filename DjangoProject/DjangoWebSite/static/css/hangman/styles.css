@@ -1,0 +1,15 @@
+﻿h1
+	{
+		color: black;
+		font-family: verdana;
+		font-size: 300%;
+		text-align: center;
+		background-color: red;
+	}
+p
+	{
+		color: black;
+		font-family: courier;
+		font-size: 100%;
+		background-color: purple;
+	}

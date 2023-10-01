@@ -1,9 +1,10 @@
 ﻿#Hang man app
 #import modules
 import random
+from gameWords import word_dictionary
 
 #declare variables
-word_dictionary = {1:"Cat", 2:"Dog", 3:"Bird", 4:"Fish", 5:"Lizard", 6:"Girraffe", 7:"Elephant", 8:"Monkey", 9:"Tiger", 10:"Lion"}
+#word_dictionary = {1:"Cat", 2:"Dog", 3:"Bird", 4:"Fish", 5:"Lizard", 6:"Girraffe", 7:"Elephant", 8:"Monkey", 9:"Tiger", 10:"Lion"}
 guess_dictionary = {}
 current_game_word = word_dictionary[random.randint(1,10)].lower()
 word_length = len(current_game_word)
@@ -46,9 +47,6 @@ def check_game_status():
 	elif correct_guess == current_game_word:
 		game_status = "won"
 		return game_status
-	#elif correct_guess != current_game_word:
-	#	game_status = "lost"
-	#	return game_status
 	else:
 		game_status = "in progress"
 		return game_status

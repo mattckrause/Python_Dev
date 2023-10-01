@@ -8,6 +8,6 @@ def test(request):
 	context = {
 		'title':'Test Page',
 		'heading':'Hello, World App',
-		'message':'This is my attempt at creating a Hello World app using Django. Eventually, I will add css to make it look better'
+		'message':'This is my attempt at creating a Hello World app using Django. Unbelieveably bad css included.'
 	}
 	return HttpResponse(template.render(context,request))
