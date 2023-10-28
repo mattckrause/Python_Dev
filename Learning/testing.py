@@ -1,13 +1,10 @@
-﻿import tkinter as tk
+﻿search = "Grothdarr"
 
-window = tk.Tk()
-window.title("Hangman")
-window.geometry("500x500")
+print("{} is on sale!".format(search))
 
-greeting = tk.Label(text="Welcome to Hangman!")
-greeting.pack()
-
-guess = tk.Entry()
-guess.pack()
-
-window.mainloop()
+#azure function cron for every saturday morning at 9am
+#https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python#example
+#https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python#cron-expressions
+#https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python#schedule-1
+#https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python#example
+#https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python#schedule-1
